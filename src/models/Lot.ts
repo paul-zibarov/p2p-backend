@@ -23,7 +23,9 @@ export default (sequelize: Sequelize) => {
             askedAmount: {type: DataType.INTEGER, field: "asked_asset_amount"},
             txHash: {type: DataType.STRING, field: "tx_hash"},
             txHashSuccess: {type: DataType.STRING, field: "tx_hash_success"},
+            buyerAddress: {type: DataType.STRING, field: "buyer_address"},
             createdAt: {type: DataType.INTEGER, field: "created_at"},
+            updatedAt: {type: DataType.INTEGER, field: "updated_at"}
         },
         {
             tableName: "lots",

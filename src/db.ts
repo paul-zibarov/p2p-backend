@@ -3,18 +3,18 @@ import Lot from './models/Lot'
 require("dotenv").config();
 
 export const sequelize: Sequelize = new Sequelize(
-  'postgres',
-  'postgres',
-  '1111',
+  process.env.POSTGRES_DB || 'postgres',
+  process.env.POSTGRES_USER || 'postgres',
+  process.env.POSTGRES_PASSWORD || '1111',
   {
-    host: 'localhost',
-    port: 5432,
+    host: process.env.POSTGRES_HOST || 'localhost',
+    port: Number(process.env.PORT_DB) || 5432,
     dialect: 'postgres',
     dialectOptions: {
-      // ssl: {
-      //   require: false,
-      //   rejectUnauthorized: false
-      // }
+      ssl: process.env.POSTGRES_DB ? {
+        require: false,
+        rejectUnauthorized: false
+      } : null
     },
     query: {
       raw: true
