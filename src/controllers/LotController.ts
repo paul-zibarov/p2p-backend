@@ -29,7 +29,8 @@ export const getOwnerLots = async (owner: string, page: number, countPerPage: nu
     let offset = (page - 1) * countPerPage;
     return await models.Lot.findAll({ 
         where: { 
-            sellerAddress: owner 
+            sellerAddress: owner,
+            status: 0
         },
         order: [['lotId','DESC']],
         limit: countPerPage,
