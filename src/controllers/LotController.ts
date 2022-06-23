@@ -1,8 +1,12 @@
 import { models, sequelize } from '../db';
 import { Event } from 'ethers';
 
-export const getAllLots = async () => {
-    return await models.Lot.findAll();
+export const getAllActiveLots = async () => {
+    return await models.Lot.findAll({ where: { status: 0 } });
+}
+
+export const getAllActiveLotsCount = async () => {
+    return await models.Lot.count({ where: { status: 0 } });
 }
 
 export const getLots = async (page: number, countPerPage: number) => {

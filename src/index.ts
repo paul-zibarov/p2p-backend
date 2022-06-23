@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 
 import { handleNewLotEvents, handleBuyLotEvents, handleCancelLotEvents } from "./services/EventHandler";
 import { sequelize } from "./db"
-import { getLotById, getLots } from './controllers/LotController';
+import { getAllActiveLotsCount, getLotById, getLots } from './controllers/LotController';
 
 const app = express()
 const jsonParser = bodyParser.json();
@@ -15,7 +15,18 @@ app.get('/', async (req, res) => {
     });
 })
 
-app.get('/getLots', jsonParser, async (req, res) => {
+app.get('/getActiveLotsCount', async (req, res) => {
+    try {
+        let count = await getAllActiveLotsCount();
+        res.send({
+            count
+        })
+    } catch(e) {
+        console.log(e)
+    }
+})
+
+app.get('/getActiveLots', jsonParser, async (req, res) => {
     try {
         let lots = await getLots(req.body.page, req.body.countPerPage);
         res.send(lots)
