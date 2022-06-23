@@ -1,10 +1,18 @@
-import express from 'express'
+import express from 'express';
+import cors from 'cors';
+
+const corsOptions = {
+    origin: '*', 
+    credentials: true,
+    optionSuccessStatus: 200
+}
 
 import { handleNewLotEvents, handleBuyLotEvents, handleCancelLotEvents } from "./services/EventHandler";
 import { sequelize } from "./db"
 import { getAllActiveLotsCount, getLotById, getLots, getOwnerLots } from './controllers/LotController';
 
 const app = express()
+app.use(cors(corsOptions));
 const port = process.env.PORT || 5000;
 
 app.get('/', async (req, res) => {
