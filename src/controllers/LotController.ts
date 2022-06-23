@@ -25,6 +25,10 @@ export const getLotById = async (lotId: number) => {
     return await models.Lot.findOne({ where: { lotId } });
 }
 
+export const getOwnerLots = async (owner: string) => {
+    return await models.Lot.findAll({ where: { sellerAddress: owner } });
+}
+
 export const createLot = async (args: any[]) => {
     let e: Event = args[9];
     let block = await e.getBlock();
