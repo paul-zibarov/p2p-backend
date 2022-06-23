@@ -37,6 +37,10 @@ export const getOwnerLots = async (owner: string, page: number, countPerPage: nu
     });
 }
 
+export const getOwnerActiveLotsCount = async (owner: string) => {
+    return await models.Lot.count({ where: { sellerAddress: owner }});
+}
+
 export const createLot = async (args: any[]) => {
     let e: Event = args[9];
     let block = await e.getBlock();

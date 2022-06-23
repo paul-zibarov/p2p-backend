@@ -9,7 +9,7 @@ const corsOptions = {
 
 import { handleNewLotEvents, handleBuyLotEvents, handleCancelLotEvents } from "./services/EventHandler";
 import { sequelize } from "./db"
-import { getAllActiveLotsCount, getLotById, getLots, getOwnerLots } from './controllers/LotController';
+import { getAllActiveLotsCount, getLotById, getLots, getOwnerActiveLotsCount, getOwnerLots } from './controllers/LotController';
 
 const app = express()
 app.use(cors(corsOptions));
@@ -24,6 +24,17 @@ app.get('/', async (req, res) => {
 app.get('/getActiveLotsCount', async (req, res) => {
     try {
         let count = await getAllActiveLotsCount();
+        res.send({
+            count
+        })
+    } catch(e) {
+        console.log(e)
+    }
+})
+
+app.get('/getActiveOwnerLotsCount', async (req, res) => {
+    try {
+        let count = await getOwnerActiveLotsCount(String(req.query.owner));
         res.send({
             count
         })
