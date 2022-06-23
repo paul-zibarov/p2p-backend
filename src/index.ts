@@ -7,7 +7,13 @@ import { getLotById, getLots } from './controllers/LotController';
 
 const app = express()
 const jsonParser = bodyParser.json();
-const port = process.env.PORT_API || 5000;
+const port = process.env.PORT || 5000;
+
+app.get('/', async (req, res) => {
+    res.send({
+        status: "Working" 
+    });
+})
 
 app.get('/getLots', jsonParser, async (req, res) => {
     try {
