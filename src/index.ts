@@ -52,7 +52,7 @@ app.get('/getLotById', async (req, res) => {
 
 app.get('/getOwnerLots', async (req, res) => {
     try {
-        let lots = await getOwnerLots(String(req.query.owner));
+        let lots = await getOwnerLots(String(req.query.owner), Number(req.query.page), Number(req.query.countPerPage));
         res.send(lots)
     } catch(e) {
         console.log(e)

@@ -25,8 +25,16 @@ export const getLotById = async (lotId: number) => {
     return await models.Lot.findOne({ where: { lotId } });
 }
 
-export const getOwnerLots = async (owner: string) => {
-    return await models.Lot.findAll({ where: { sellerAddress: owner } });
+export const getOwnerLots = async (owner: string, page: number, countPerPage: number) => {
+    let offset = (page - 1) * countPerPage;
+    return await models.Lot.findAll({ 
+        where: { 
+            sellerAddress: owner 
+        },
+        order: [['lotId','DESC']],
+        limit: countPerPage,
+        offset: offset < 0 ? 0 : offset 
+    });
 }
 
 export const createLot = async (args: any[]) => {
