@@ -54,7 +54,7 @@ export const createLot = async (args: any[]) => {
         proposedAmount: args[2].toString(),
         askedAssetAddress: args[4],
         askedAssetId: args[6].toString(),
-        askedAmount: args[5].toString(),
+        askedAmount: Number(args[5] / 10 ** 18),
         txHash: e.transactionHash,
         txHashSuccess: e.transactionHash ? true : false,
         createdAt: block.timestamp
